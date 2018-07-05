@@ -13,53 +13,46 @@ arguments from the front and inserting/removing keyword arguments.
 Usage
 -----
 
-The simplest way to use signature-altering looks like this:
+The simplest way to use signature-altering looks like this::
 
-.. code-block:: python
     @decorator
     def no_op_decorator(f, *args, **kwargs):
         return f(*args, **kwargs)
 
 For the rest of the examples we will assume the decorator will be used
-as follows:
+as follows::
 
-.. code-block:: python
     @spam
     def ham(a, b):
         return a + b
 
-Suppose we want ``ham`` to behave like this:
+Suppose we want ``ham`` to behave like this::
 
-.. code-block:: python
     >>> ham(100, 2, 3)
     95
 
-We would need to provide a definition of ``spam`` like this:
+We would need to provide a definition of ``spam`` like this::
 
-.. code-block:: python
     @decorator
     def spam(f, prefix, *args, **kwargs):
         return prefix - f(*args, **kwargs)
 
 Note that ``ham`` now has a different signature from how it was defined.
 
-If we, on the other hand, want to supply fewer arguments, like this:
+If we, on the other hand, want to supply fewer arguments, like this::
 
-.. code-block:: python
     >>> ham(7)
     107
 
-We would do this:
+We would do this::
 
-.. code-block:: python
     @decorator(insert_args=1)
     def spam(f, *args, **kwargs):
         return f(100, *args, **kwargs)
 
 Keyword arguments work mostly the same, except we need to supply the names
-when inserting them:
+when inserting them::
 
-.. code-block:: python
     @decorator(insert_kwargs='a b')
     def spam(f, *args, **kwargs):
         return f(*args, a=7, b=5, **kwargs)
@@ -71,7 +64,7 @@ signature-altering is distributed on `PyPI <https://pypi.org>`_ as a universal
 wheel and is available on Linux/macOS and Windows and supports
 Python 3.5+ and PyPy.
 
-.. code-block:: bash
+::
 
     $ pip install signature-altering
 
